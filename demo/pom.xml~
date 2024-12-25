@@ -27,7 +27,7 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>17</java.version> <!-- Use Java 17 for stability -->
+		<java.version>23</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -49,12 +49,14 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-
-		<!-- MySQL Connector (only one instance) -->
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
