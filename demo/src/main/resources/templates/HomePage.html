@@ -4,41 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome Page</title>
-  <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f8ff;
-        color: #333;
-        text-align: center;
-        padding: 50px;
-    }
-    h1 {
-        color: #4682b4;
-    }
-    p {
-        font-size: 20px;
-    }
-    .button {
-        padding: 10px 20px;
-        font-size: 16px;
-        color: white;
-        background-color: #4682b4;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        text-decoration: none;
-    }
-    .button:hover {
-        background-color: #5a9bd5;
-    }
-  </style>
+<!--  add style sheet-->
+  <link rel="stylesheet" href="/HomePageStyle.CSS">
+
 </head>
 <body>
 <h1>Welcome to Our Website!</h1>
 <p>We're glad to have you here. Explore and enjoy our content.</p>
 
-<!-- Use Thymeleaf link for DataEntry page -->
-<a href="/DataEntry" class="button">Get Started</a>
+<a href="/SignUp" class="button">Sign Up</a>
 
+<div class="login-container">
+  <h2>Login</h2>
+  <form action="/login" method="POST">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="submit-button">Login</button>
+    </div>
+  </form>
+</div>
 </body>
 </html>
