@@ -17,22 +17,27 @@ public class LoginController {
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "Login";
+        return "Login"; // Return login page
     }
 
     @PostMapping("/login")
     public String loginUser(
-            @RequestParam("identifier") String email,
+            @RequestParam("identifier") String identifier, // Can be email or phone
             @RequestParam("password") String password,
             Model model) {
 
-        User user = userRepository.findByEmailAndPassword(email, password);
+        // Try to find the user by email and password, then by phone and password
+        User user = userRepository.findByEmailAndPassword(identifier, password);
+
+        if (user == null) {
+            user = userRepository.findByPhoneAndPassword(identifier, password); // Check phone if email fails
+        }
 
         if (user != null) {
-            return "Home"; // Redirect to homepage.html
+            return "Home"; // Redirect to home page if authentication is successful
         } else {
-            model.addAttribute("error", "Invalid email or password");
-            return "LoginError"; // Stay on login.html with an error message
+            model.addAttribute("error", "Invalid credentials. Please try again.");
+            return "LoginError"; // Stay on login page with an error message
         }
     }
 }

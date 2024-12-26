@@ -1,7 +1,7 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "Login";
+        return "Login"; // Login page
     }
 
     @PostMapping("/login")
@@ -26,20 +26,14 @@ public class LoginController {
             @RequestParam("password") String password,
             Model model) {
 
-        User user = null;
+        // Use UserService to authenticate user
+        User authenticatedUser = userService.authenticate(identifier, password);
 
-        // Check if the identifier is an email or phone number
-        if (identifier.contains("@")) {
-            user = userRepository.findByEmailAndPassword(identifier, password);
+        if (authenticatedUser != null) {
+            return "Home"; // Redirect to the homepage
         } else {
-            user = userRepository.findByPhoneNumberAndPassword(identifier, password);
-        }
-
-        if (user != null) {
-            return "Home"; // Redirect to homepage.html
-        } else {
-            model.addAttribute("error", "Invalid email or password");
-            return "LoginError"; // Stay on login.html with an error message
+            model.addAttribute("error", "Invalid credentials. Please try again.");
+            return "LoginError"; // Stay on the login page with an error message
         }
     }
 }
