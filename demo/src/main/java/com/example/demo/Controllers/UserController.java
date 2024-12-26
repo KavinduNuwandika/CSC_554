@@ -20,10 +20,21 @@ public class UserController {
         return "HomePage";
     }
 
+    @GetMapping("/Homepage")
+    public String homepage() {
+        return "homepage"; // Return homepage view
+    }
+
+
     @GetMapping("/SignUp")
     public String dataEntryPage(Model model) {
         model.addAttribute("user", new User());
         return "SignUp";
+    }
+
+    @GetMapping("/loginPage")
+    public String loginPage() {
+        return "Login"; // Return login page view
     }
 
     @PostMapping("/submit")
