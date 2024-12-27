@@ -31,6 +31,18 @@ public class UserController {
         model.addAttribute("user", new User());
         return "SignUp";
     }
+    @PostMapping("/SignUp")
+    public String signUp(@ModelAttribute("user") User user, Model model) {
+        // Check if email or phone already exists
+        if (userService.isEmailOrPhoneExist(user.getEmail(), user.getPhone())) {
+            model.addAttribute("error", "Email or Phone number already exists!");
+            return "SignUp"; // Return to the same page with the error
+        }
+
+        // Save the user if no error
+        userService.saveUser(user);
+        return "redirect:/login"; // Redirect to login after successful signup
+    }
 
     @GetMapping("/loginPage")
     public String loginPage() {

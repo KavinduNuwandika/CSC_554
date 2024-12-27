@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Entry Page</title>
+    <title>Sign Up</title>
     <!-- Link to the external stylesheet -->
     <link rel="stylesheet" href="CSS/SignupStyle.css">
 </head>
@@ -13,22 +13,28 @@
 <p>Please fill in the form below:</p>
 
 <div class="form-container">
-    <!-- Updated form action to /submit, matching the controller mapping -->
-    <form action="/submit" method="POST">
+    <!-- Form action to /SignUp (POST mapping in your controller) -->
+    <form action="/SignUp" method="POST" th:object="${user}">
+
+        <!-- Error message section (shown only if an error exists) -->
+        <div th:if="${error != null}" style="color: red; font-weight: bold;">
+            <p th:text="${error}"></p>
+        </div>
+
         <label for="first-name">First Name:</label><br>
-        <input type="text" id="first-name" name="firstName" required pattern="[A-Za-z]+" title="Only letters allowed"><br>
+        <input type="text" id="first-name" name="firstName" th:value="${user.firstName}" required pattern="[A-Za-z]+" title="Only letters allowed"><br>
 
         <label for="last-name">Last Name:</label><br>
-        <input type="text" id="last-name" name="lastName" required pattern="[A-Za-z]+" title="Only letters allowed"><br>
+        <input type="text" id="last-name" name="lastName" th:value="${user.lastName}" required pattern="[A-Za-z]+" title="Only letters allowed"><br>
 
         <label for="dob">Date of Birth:</label><br>
-        <input type="date" id="dob" name="dob" required><br>
+        <input type="date" id="dob" name="dob" th:value="${user.dob}" required><br>
 
         <label for="phone">Phone Number:</label><br>
-        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Enter a valid 10-digit phone number" required><br>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Enter a valid 10-digit phone number" required th:value="${user.phone}"><br>
 
         <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br>
+        <input type="email" id="email" name="email" required th:value="${user.email}"><br>
 
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" required minlength="6" title="Password must be at least 6 characters long"><br>
@@ -37,8 +43,6 @@
     </form>
     <br>
     <p>Already have an account? <a href="/">Login</a></p>
-
-
 </div>
 
 </body>

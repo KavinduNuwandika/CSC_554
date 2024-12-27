@@ -14,8 +14,4 @@ public class UserService {
     public void saveUser(User user) {
         userRepository.save(user);
     }
-
-    public boolean isEmailOrPhoneExist(String email, String phone) {
-        return userRepository.existsByEmail(email) || userRepository.existsByPhone(phone);
-    }
 }
