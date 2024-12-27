@@ -51,8 +51,12 @@ h1 {
 
 /* Table styles */
 table {
-  width: 100%;
+  width: 90%;
   border-collapse: collapse;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin: 20px auto;
 }
 
 th, td {
@@ -83,6 +87,18 @@ tbody tr:hover {
   font-size: 16px;
 }
 
+.filter-form {
+  display: flex;
+  margin-top: 15px;
+  text-align: left;
+  margin-left: 20px;
+  padding : 10px;
+}
+
+.user-list {
+  margin-top : 20px;
+}
+
 /* Button styles */
 
 /* Parent container for the buttons */
@@ -91,6 +107,14 @@ tbody tr:hover {
   justify-content: center;   /* Center buttons horizontally */
   align-items: center;       /* Center buttons vertically (if needed) */
   margin-top: 20px;           /* Optional: space above the buttons */            /* Make the container take the full viewport height for vertical centering */
+}
+.button-container2 {
+  justify-content: left;
+  margin-top: 20px;           /* Optional: space above the buttons */            /* Make the container take the full viewport height for vertical centering */
+  padding-left: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+
 }
 
 

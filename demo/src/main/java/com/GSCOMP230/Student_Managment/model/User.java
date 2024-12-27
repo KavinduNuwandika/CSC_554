@@ -1,10 +1,7 @@
 package com.GSCOMP230.Student_Managment.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
@@ -26,6 +23,11 @@ public class User {
     private String password;
     private String role;
     private String User_ID;
+
+    public User() {
+        this.role = "Student";
+    }
+
 
     // Getters and Setters
 
@@ -90,15 +92,18 @@ public class User {
     }
 
     public void setRole(String role) {
-        this.role = "Student";
+        this.role = role;
     }
+
+
 
     public String getUser_ID() {
         return User_ID;
     }
 
-    public void setUser_ID(String User_ID) {
-        this.User_ID = "User_" + id;
+    @PostPersist
+    public void setUser_ID() {
+        this.User_ID = "USER_" + this.id;
     }
 
 }

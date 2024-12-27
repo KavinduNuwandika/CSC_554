@@ -5,24 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User List</title>
 
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Link to External CSS -->
     <link rel="stylesheet" href="/CSS/Admin/AdminHomeStyles.CSS">
-
 </head>
 <body>
 
 <h1>Admin Panel - User List</h1>
 
-<!-- Check if the user list is empty -->
-<div th:if="${#lists.isEmpty(userList)}">
+<form class="filter-form" method="get" th:action="@{/admin/userlist}">
+    <label for="roleFilter">Filter by Role:</label>
+    <select name="roleFilter" id="roleFilter">
+        <option value="">Select All</option>
+        <option value="Admin" th:selected="${roleFilter == 'Admin'}">Admin</option>
+        <option value="Teacher" th:selected="${roleFilter == 'Teacher'}">Teacher</option>
+        <option value="Student" th:selected="${roleFilter == 'Student'}">Student</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+<div class="button-container2">
+    <br>
+    <a class="btn-home" href="/admin/home">Back to Admin Home</a>
+</div>
+
+<!-- If userList is empty -->
+<div class=".user-list" th:if=" ${#lists.isEmpty(userList)}">
     <p>No users found.</p>
 </div>
 
-<!-- Display user details in a table -->
-<div th:if="${not #lists.isEmpty(userList)}">
+<!-- Display users if list is not empty -->
+<div class=".user-list" th:if="${not #lists.isEmpty(userList)}">
     <table>
         <thead>
         <tr>
@@ -31,6 +42,8 @@
             <th>Email</th>
             <th>Phone</th>
             <th>Date of Birth</th>
+            <th>Role</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -40,15 +53,29 @@
             <td th:text="${user.email}"></td>
             <td th:text="${user.phone}"></td>
             <td th:text="${user.dob}"></td>
+            <td>
+                <form method="post" th:action="@{/admin/updateUserRoles}">
+                    <input type="hidden" name="userId" th:value="${user.id}" />
+                    <select name="role">
+                        <option value="Admin" th:selected="${user.role == 'Admin'}">Admin</option>
+                        <option value="Teacher" th:selected="${user.role == 'Teacher'}">Teacher</option>
+                        <option value="Student" th:selected="${user.role == 'Student'}">Student</option>
+                    </select>
+                    <button type="submit">Save</button>
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{/admin/deleteUser}">
+                    <input type="hidden" name="userId" th:value="${user.id}" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
 
-<div class="button-container">
-    <!-- Go back to Admin home -->
-    <a href="/admin/home" class="btn-home">Back to Admin Home</a>
-</div>
 
 </body>
 </html>
+
