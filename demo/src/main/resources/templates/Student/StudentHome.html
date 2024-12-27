@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student View</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f7fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .tab-link {
+            font-size: 1.2rem;
+            color: #007bff;
+            margin-right: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .tab-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .tab-link:focus {
+            outline: none;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-custom:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome, Student!</h1>
+    <div class="button-container">
+        <a href="/student/registered-classes" class="tab-link btn btn-outline-primary">Registered Classes</a>
+        <a href="/student/view-results" class="tab-link btn btn-outline-primary">View Results</a>
+    </div>
+
+    <div class="button-container">
+        <a href="/" class="btn-custom">Go to Homepage</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -11,8 +11,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.GSCOMP230</groupId>
+	<artifactId>Student_Managment</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
@@ -20,6 +20,7 @@
 	<properties>
 		<java.version>23</java.version> <!-- Java 17 -->
 	</properties>
+
 
 	<dependencies>
 		<!-- Spring Boot Starter Data JPA for JPA and Hibernate support -->
@@ -33,6 +34,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>4.0.4</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Spring Boot Starter Web for building web applications -->
 		<dependency>
@@ -40,11 +47,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-<!--		Spring secuirity-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
 
 		<!-- Spring Boot DevTools (for automatic reload during development) -->
 		<dependency>

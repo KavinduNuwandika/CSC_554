@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Link to External CSS -->
+  <link rel="stylesheet" href="/CSS/Admin/AdminHomeStyles.CSS">
+
+</head>
+<body>
+
+<h1>Welcome to Admin Panel Home</h1>
+
+<!-- Display error if login failed -->
+<div th:if="${error}" class="error">
+  <p>[[${error}]]</p>
+</div>
+
+<div class="content-wrapper">
+  <!-- Display user details if login was successful -->
+  <div th:if="${user}" class="user-details">
+    <h2>Welcome, <span th:text="${user.firstName}">User</span> <span th:text="${user.lastName}">User</span></h2>
+    <p><strong>Email:</strong> <span th:text="${user.email}">Email</span></p>
+    <p><strong>Phone:</strong> <span th:text="${user.phone}">Phone</span></p>
+    <p><strong>Date of Birth:</strong> <span th:text="${user.dob}">Date of Birth</span></p>
+  </div>
+</div>
+
+<div class="button-container">
+  <!-- Go to User list Button -->
+  <a href="/admin/userlist" class="btn-home">Go to User list</a>
+</div>
+<div class="button-container">
+  <br>
+  <!-- Go to Homepage Button -->
+  <a href="/" class="btn-home">Go to Homepage</a>
+</div>
+
+</body>
+</html>

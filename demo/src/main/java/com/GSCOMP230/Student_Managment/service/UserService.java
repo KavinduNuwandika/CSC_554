@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package com.GSCOMP230.Student_Managment.service;
 
-import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
+import com.GSCOMP230.Student_Managment.model.User;
+import com.GSCOMP230.Student_Managment.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
