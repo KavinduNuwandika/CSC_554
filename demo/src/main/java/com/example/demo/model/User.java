@@ -24,6 +24,8 @@ public class User {
     private String phone;
     private String email;
     private String password;
+    private String role;
+    private String User_ID;
 
     // Getters and Setters
 
@@ -82,4 +84,21 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = "Student";
+    }
+
+    public String getUser_ID() {
+        return User_ID;
+    }
+
+    public void setUser_ID(String User_ID) {
+        this.User_ID = "User_" + id;
+    }
+
 }

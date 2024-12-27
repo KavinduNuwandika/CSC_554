@@ -46,7 +46,6 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-
 		<!-- Spring Boot DevTools (for automatic reload during development) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

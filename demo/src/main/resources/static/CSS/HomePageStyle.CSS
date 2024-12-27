@@ -119,3 +119,17 @@ p {
 .toggle-buttons button:hover {
     background-color: #5a9bd5;
 }
+
+.user-details {
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    .user-details {
+        font-size: 1rem;
+    }
+}

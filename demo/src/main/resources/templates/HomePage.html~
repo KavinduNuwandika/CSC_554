@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome Page</title>
-  <link rel="stylesheet" href="/HomePageStyle.CSS">
+  <!-- Link to the external CSS -->
+  <link rel="stylesheet" href="/css/HomePageStyle.css">
 </head>
 <body>
 <h1>Welcome to Our Website!</h1>
@@ -25,12 +26,12 @@
     <h3>Login with Email</h3>
     <form action="/login" method="POST">
       <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <label for="identifier-email">Email:</label>
+        <input type="email" id="identifier-email" name="identifier" placeholder="Enter your email" required>
       </div>
       <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <label for="password-email">Password:</label>
+        <input type="password" id="password-email" name="password" placeholder="Enter your password" required>
       </div>
       <div class="form-group">
         <button type="submit" class="submit-button">Login</button>
@@ -43,8 +44,8 @@
     <h3>Login with Phone Number</h3>
     <form action="/login" method="POST">
       <div class="form-group">
-        <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number"
+        <label for="identifier-phone">Phone Number:</label>
+        <input type="tel" id="identifier-phone" name="identifier" placeholder="Enter your phone number"
                pattern="^(\+?\d{1,3})?\d{10}$"
                required
                title="Enter a valid phone number (e.g., +911234567890 or 1234567890)">
@@ -62,28 +63,7 @@
 
 <p>Don't have an account? <a href="/SignUp">Sign Up</a></p>
 
-  <script>
-    // Get references to buttons and sections
-    const emailToggle = document.getElementById('emailToggle');
-    const phoneToggle = document.getElementById('phoneToggle');
-    const emailSection = document.getElementById('emailSection');
-    const phoneSection = document.getElementById('phoneSection');
+<!-- Link to the external JavaScript -->
 
-    // Add event listeners for toggling sections
-    emailToggle.addEventListener('click', () => {
-      emailSection.classList.add('active');
-      phoneSection.classList.remove('active');
-      emailToggle.classList.add('active');
-      phoneToggle.classList.remove('active');
-    });
-
-    phoneToggle.addEventListener('click', () => {
-      phoneSection.classList.add('active');
-      emailSection.classList.remove('active');
-      phoneToggle.classList.add('active');
-      emailToggle.classList.remove('active');
-    });
-  </script>
-<!--</div>-->
 </body>
 </html>

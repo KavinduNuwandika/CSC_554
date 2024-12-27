@@ -1,7 +1,10 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 import java.time.LocalDate;
 
 @Entity
@@ -11,28 +14,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name", nullable = false)
-    @NotBlank(message = "First name is required")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
-    @NotBlank(message = "Last name is required")
+    @Column(name = "last_name")
     private String lastName;
 
-    @NotNull(message = "Date of birth is required")
     private LocalDate dob;
-
-    @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Invalid phone number")
-    @Column(unique = true)
     private String phone;
-
-    @Email(message = "Invalid email address")
-    @NotBlank(message = "Email is required")
-    @Column(unique = true, nullable = false)
     private String email;
-
-    @NotBlank(message = "Password is required")
     private String password;
+    private String role;
+    private String Stu_ID;
 
     // Getters and Setters
 
@@ -92,30 +85,20 @@ public class User {
         this.password = password;
     }
 
-    // Override toString (excluding password)
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dob=" + dob +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String getRole() {
+        return role;
     }
 
-    // Optional: Override equals and hashCode
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id != null && id.equals(user.id);
+    public void setRole(String role) {
+        this.role = "Student";
     }
 
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+    public String getStu_ID() {
+        return Stu_ID;
     }
+
+    public void setStu_ID(String Stu_ID) {
+        this.Stu_ID = "STU_" + id;
+    }
+
 }

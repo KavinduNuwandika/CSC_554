@@ -34,7 +34,17 @@ public class LoginController {
         }
 
         if (user != null) {
-            return "Home"; // Redirect to home page if authentication is successful
+            switch (user.getRole()) {
+                case "Admin":
+                    return "AdminHome"; // Admin dashboard
+                case "Teacher":
+                    return "TeacherDashboard"; // Teacher dashboard
+                case "Student":
+                    return "StudentResults"; // Student can only see results
+                default:
+                    model.addAttribute("error", "Invalid credentials.");
+                    return "LoginError"; // If role is not set or invalid
+            }
         } else {
             model.addAttribute("error", "Invalid credentials. Please try again.");
             return "LoginError"; // Stay on login page with an error message
