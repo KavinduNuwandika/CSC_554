@@ -50,13 +50,20 @@
     </form>
 
     <!-- Error or Success Messages -->
+    <!-- Error Message -->
+</div>
+<!--    error massege-->
     <div th:if="${error}" class="alert alert-danger mt-3" role="alert">
         <p th:text="${error}"></p>
     </div>
+    <!-- Success Message -->
     <div th:if="${success}" class="alert alert-success mt-3" role="alert">
         <p th:text="${success}"></p>
     </div>
-</div>
+    <script>
+        setTimeout(function(){
+        }, 3000);
+    </script>
 
 </body>
 </html>

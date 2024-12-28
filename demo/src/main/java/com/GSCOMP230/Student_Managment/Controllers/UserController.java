@@ -41,7 +41,7 @@ public class UserController {
 
         // Save the user if no error
         userService.saveUser(user);
-        return "redirect:/login"; // Redirect to login after successful signup
+        return "redirect:/"; // Redirect to login after successful signup
     }
 
     @GetMapping("/loginPage")

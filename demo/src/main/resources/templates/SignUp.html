@@ -30,6 +30,16 @@
         <label for="dob">Date of Birth:</label><br>
         <input type="date" id="dob" name="dob" th:value="${user.dob}" required><br>
 
+        <label for="Gender">Gender:</label><br>
+        <select id="Gender" name="Gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br>
+
+        <label for="regYear">Year of Registration:</label><br>
+        <input type="number" id="regYear" name="regYear" min="1900" max="2100" step="1" value="2022" required><br>
+
         <label for="phone">Phone Number:</label><br>
         <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Enter a valid 10-digit phone number" required th:value="${user.phone}"><br>
 
@@ -38,6 +48,9 @@
 
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" required minlength="6" title="Password must be at least 6 characters long"><br>
+
+
+
 
         <input type="submit" value="Submit">
     </form>

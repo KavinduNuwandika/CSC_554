@@ -23,6 +23,8 @@ public class User {
     private String password;
     private String role;
     private String User_ID;
+    private String Gender;
+    private int regYear;
 
     public User() {
         this.role = "Student";
@@ -95,6 +97,14 @@ public class User {
         this.role = role;
     }
 
+    public int getRegYear() {
+        return regYear;
+    }
+
+    public void setRegYear(int regYear) {
+        this.regYear = regYear;
+    }
+
 
 
     public String getUser_ID() {
@@ -104,6 +114,14 @@ public class User {
     @PostPersist
     public void setUser_ID() {
         this.User_ID = "USER_" + this.id;
+    }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setGender(String gender) {
+        Gender = gender;
     }
 
 }
