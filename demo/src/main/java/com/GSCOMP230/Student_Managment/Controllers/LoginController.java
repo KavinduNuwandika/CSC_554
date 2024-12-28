@@ -63,6 +63,11 @@ public class LoginController {
             // Store the user's email in the session
             session.setAttribute("userEmail", user.getEmail());
 
+            // If the user is a teacher, store the teacherId in the session
+            if (user.getRole().equals("Teacher")) {
+                session.setAttribute("teacherId", user.getId()); // Store teacher's ID in session
+            }
+
             switch (user.getRole()) {
                 case "Admin":
                     return "redirect:/admin/home"; // Redirect to admin home page

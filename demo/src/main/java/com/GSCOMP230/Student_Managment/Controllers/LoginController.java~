@@ -25,17 +25,17 @@ public class LoginController {
 
 
 
-    @GetMapping("/teacher/dashboard")
+    @GetMapping("/teacher/home")
     public String showTeacherDashboard(HttpSession session, Model model) {
         String email = (String) session.getAttribute("userEmail");
         if (email != null) {
             Optional<User> userOpt = userRepository.findByEmail(email); // Fetch user by email
             userOpt.ifPresent(user -> model.addAttribute("user", user)); // Pass user details to the dashboard
         }
-        return "TeacherDashboard"; // Return the teacher dashboard view
+        return "/Teacher/TeacherHome"; // Return the teacher dashboard view
     }
 
-    @GetMapping("/student/results")
+    @GetMapping("/student/home")
     public String showStudentResults(HttpSession session, Model model) {
         String email = (String) session.getAttribute("userEmail");
         if (email != null) {
@@ -67,9 +67,9 @@ public class LoginController {
                 case "Admin":
                     return "redirect:/admin/home"; // Redirect to admin home page
                 case "Teacher":
-                    return "redirect:/teacher/dashboard"; // Redirect to teacher dashboard
+                    return "redirect:/teacher/home"; // Redirect to teacher dashboard
                 case "Student":
-                    return "redirect:/student/results"; // Redirect to student results page
+                    return "redirect:/student/home"; // Redirect to student results page
                 default:
                     model.addAttribute("error", "Invalid role configuration.");
                     return "LoginError"; // Stay on login page with an error message
