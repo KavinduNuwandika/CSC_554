@@ -1,5 +1,6 @@
 package com.GSCOMP230.Student_Managment.Controllers;
 
+import com.GSCOMP230.Student_Managment.model.Course;
 import com.GSCOMP230.Student_Managment.model.User;
 import com.GSCOMP230.Student_Managment.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.GSCOMP230.Student_Managment.repository.CourseRepository;
 
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
@@ -18,6 +20,9 @@ public class AdminController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     @GetMapping("/admin/home")
     public String showAdminHome(HttpSession session, Model model) {
@@ -87,4 +92,53 @@ public class AdminController {
         }
         return "redirect:/admin/userlist"; // Redirect back to user list page
     }
+
+    @GetMapping("/admin/view-courses")
+    public String viewCoursesForAdmin(Model model) {
+        List<Course> courses = courseRepository.findAll(); // Get all courses
+        List<User> teachers = userRepository.findByRole("TEACHER"); // Fetch all teachers with the role "TEACHER"
+
+        model.addAttribute("courses", courses);
+        model.addAttribute("teachers", teachers); // Add teachers list for dropdown
+        return "Admin/View-Courses"; // View to display the courses and teachers
+    }
+
+    // Handle the update of a course's teacher
+    @PostMapping("/admin/update-course-teacher")
+    public String updateCourseTeacher(
+            @RequestParam Long courseId,
+            @RequestParam Long teacherId,
+            Model model) {
+        try {
+            Course course = courseRepository.findById(courseId)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid course ID"));
+
+            // Fetch the teacher using the teacherId
+            User teacher = userRepository.findById(teacherId)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid teacher ID"));
+
+            // Assign the teacher to the course
+            course.setTeacher(teacher);
+            courseRepository.save(course); // Save the updated course
+
+            model.addAttribute("success", "Teacher updated successfully for course: " + course.getCourseName());
+        } catch (Exception e) {
+            model.addAttribute("error", "Error updating course teacher: " + e.getMessage());
+        }
+
+        return "redirect:/admin/view-courses"; // Redirect back to the course view page
+    }
+
+    // Handle the deletion of a course
+    @PostMapping("/admin/delete-course")
+    public String deleteCourse(@RequestParam("courseId") Long courseId, Model model) {
+        try {
+            courseRepository.deleteById(courseId); // Delete the course
+            model.addAttribute("success", "Course deleted successfully.");
+        } catch (Exception e) {
+            model.addAttribute("error", "Error deleting course: " + e.getMessage());
+        }
+        return "redirect:/admin/view-courses"; // Redirect back to the course view page
+    }
+
 }

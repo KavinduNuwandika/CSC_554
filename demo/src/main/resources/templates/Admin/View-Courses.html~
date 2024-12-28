@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin View Courses</title>
+    <link rel="stylesheet" href="/CSS/Teacher/TeacherClassStyles.css">
+</head>
+<body>
+
+<header>All Courses</header>
+
+<div class="container mt-5">
+
+
+    <!-- Success or Error Messages -->
+    <div th:if="${success}" class="alert alert-success mt-3" role="alert">
+        <p th:text="${success}"></p>
+    </div>
+    <div th:if="${error}" class="alert alert-danger mt-3" role="alert">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!-- Table to Display Courses -->
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th>Course Code</th>
+            <th>Course Name</th>
+            <th>Teacher</th>
+            <th>Change Teacher</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${courses}">
+            <td th:text="${course.courseCode}"></td>
+            <td th:text="${course.courseName}"></td>
+            <td th:text="${course.teacher != null ? course.teacher.firstName + ' ' + course.teacher.lastName : 'No teacher assigned'}"></td>
+            <td>
+                <!-- Form to update the teacher -->
+                <form th:action="@{/admin/update-course-teacher}" method="post">
+                    <input type="hidden" name="courseId" th:value="${course.courseId}" />
+                    <select name="teacherId" class="form-control">
+                        <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.firstName + ' ' + teacher.lastName}"></option>
+                    </select>
+                    <button type="submit" class="btn2">Update Teacher</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/admin/delete-course/{courseId}(courseId=${course.courseId})}" class="btn-danger">Delete</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+    <div class=".mt-5">
+        <br>
+        <a href="/admin/home" class="btn-home">Go to Admin Home</a>
+    </div>
+
+
+
+</body>
+</html>

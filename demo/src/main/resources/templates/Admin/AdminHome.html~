@@ -36,10 +36,7 @@
   <a href="/admin/userlist" class="btn-home">Go to User list</a>
 </div>
 
-<div class="button-container">
-  <!-- Go to View Courses Button -->
-  <a href="/admin/view-courses" class="btn-home">View All Courses</a>
-</div>
+
 
 <div class="button-container">
   <br>
