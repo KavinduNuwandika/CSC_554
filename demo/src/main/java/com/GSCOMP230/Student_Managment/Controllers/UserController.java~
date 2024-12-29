@@ -92,9 +92,25 @@ public class UserController {
         // Save the updated user
         userService.updateUser(existingUser);
 
-        // Add the updated user to the model
-        model.addAttribute("user", existingUser);  // Important! This ensures the user object is available in the view.
+        // Add the updated user to the model so it's available in the view
+        model.addAttribute("user", existingUser);
         model.addAttribute("success", "Details updated successfully");
+
+        // Determine the redirect URL based on the user's role
+        String redirectUrl = "";
+        switch (existingUser.getRole()) {
+            case "ADMIN":
+                redirectUrl = "/admin/home";
+                break;
+            case "TEACHER":
+                redirectUrl = "/teacher/home";
+                break;
+            case "STUDENT":
+                redirectUrl = "/student/home";
+                break;
+            default:
+                redirectUrl = "/";
+        }
 
         return "details-update-success"; // Thymeleaf template name
     }

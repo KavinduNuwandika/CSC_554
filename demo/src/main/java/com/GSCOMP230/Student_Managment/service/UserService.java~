@@ -4,7 +4,6 @@ import com.GSCOMP230.Student_Managment.model.Enrollment;
 import com.GSCOMP230.Student_Managment.model.User;
 import com.GSCOMP230.Student_Managment.repository.EnrollmentRepository;
 import com.GSCOMP230.Student_Managment.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +45,6 @@ public class UserService {
     }
 
 
-    @Transactional
     public void updateUser(User user) {
         userRepository.save(user);
     }

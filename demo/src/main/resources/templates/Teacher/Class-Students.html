@@ -3,13 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>Enrolled Students</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    h2 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+
+    table {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .table th, .table td {
+        text-align: center;
+    }
+
+    .button-container form {
+        margin-top: 15px;
+    }
+
+    .alert {
+        margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 
 <!-- Display selected course details -->
 <h2>Selected Course</h2>
-<table border="1">
-  <thead>
+<table class="table table-bordered table-striped">
+  <thead class="thead-dark">
   <tr>
     <th>Course Name</th>
     <th>Academic Year</th>
@@ -27,8 +56,8 @@
 
 <!-- Display marked students -->
 <h2>Marked Students</h2>
-<table border="1">
-  <thead>
+<table class="table table-bordered table-striped">
+  <thead class="thead-dark">
   <tr>
     <th>Student Name</th>
     <th>Year of Registration</th>
@@ -50,22 +79,26 @@
   </tbody>
 </table>
 
-<br>
-<!--edit marks redirect-->
-<form action="/teacher/edit-marks" method="get">
-  <input type="hidden" name="courseId" th:value="${selectedCourse.courseId}" />
-  <button type="submit">Edit Marks</button>
-</form>
-<!--delete marks redirect-->
-<form action="/teacher/delete-marks" method="get">
-  <input type="hidden" name="courseId" th:value="${selectedCourse.courseId}" />
-  <button type="submit">Delete Marks</button>
-</form>
+<!-- Edit marks redirect -->
+<div class="button-container">
+  <form action="/teacher/edit-marks" method="get">
+    <input type="hidden" name="courseId" th:value="${selectedCourse.courseId}" />
+    <button type="submit" class="btn btn-primary">Edit Marks</button>
+  </form>
+</div>
+
+<!-- Delete marks redirect -->
+<div class="button-container">
+  <form action="/teacher/delete-marks" method="get">
+    <input type="hidden" name="courseId" th:value="${selectedCourse.courseId}" />
+    <button type="submit" class="btn btn-danger">Delete Marks</button>
+  </form>
+</div>
 
 <!-- Display unmarked students -->
 <h2>Unmarked Students</h2>
-<table border="1">
-  <thead>
+<table class="table table-bordered table-striped">
+  <thead class="thead-dark">
   <tr>
     <th>Student Name</th>
     <th>Year of Registration</th>
@@ -87,22 +120,25 @@
   </tbody>
 </table>
 
-<br>
-<form action="/teacher/mark-students" method="get">
-  <input type="hidden" name="courseId" th:value="${selectedCourse.courseId}" />
-  <button type="submit">Mark Students</button>
-</form>
-<br>
-<br>
+<!-- Mark students redirect -->
 <div class="button-container">
-  <form action="/teacher/view-classes" method="get">
-    <button type="submit">View Course</button>
+  <form action="/teacher/mark-students" method="get">
+    <input type="hidden" name="courseId" th:value="${selectedCourse.courseId}" />
+    <button type="submit" class="btn btn-success">Mark Students</button>
   </form>
 </div>
-<br>
+
+<!-- Back to Course View Button -->
+<div class="button-container">
+  <form action="/teacher/view-classes" method="get">
+    <button type="submit" class="btn btn-secondary">View Course</button>
+  </form>
+</div>
+
+<!-- Back to Teacher Home Button -->
 <div class="button-container">
   <form action="/teacher/home" method="get">
-    <button type="submit">Teacher Home</button>
+    <button type="submit" class="btn btn-info">Teacher Home</button>
   </form>
 </div>
 

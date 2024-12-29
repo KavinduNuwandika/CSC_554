@@ -2,7 +2,41 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Marks</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+        }
+
+        .button-container form {
+            margin-top: 30px;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+
+        input[type="number"] {
+            width: 100px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -12,11 +46,12 @@
     <!-- Hidden field for courseId -->
     <input type="hidden" name="courseId" th:value="${courseId}" />
 
-    <table border="1">
-        <thead>
+    <!-- Table to display students and marks -->
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
         <tr>
             <th>Student Name</th>
-            <th>Marks</th>
+            <th>Marks (0-100)</th>
         </tr>
         </thead>
         <tbody>
@@ -25,7 +60,7 @@
                 <td th:text="${enrollment.student.firstName + ' ' + enrollment.student.lastName}"></td>
                 <td>
                     <!-- Marks input field -->
-                    <input type="number" name="marks" th:value="${enrollment.marks}" min="0" max="100" />
+                    <input type="number" name="marks" th:value="${enrollment.marks}" min="0" max="100" required />
                     <input type="hidden" name="enrollmentIds" th:value="${enrollment.id}" />
                 </td>
             </tr>
@@ -33,17 +68,20 @@
         </tbody>
     </table>
 
-    <br>
-    <button type="submit">Save Changes</button>
+    <!-- Save Changes Button -->
+    <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
 </form>
 
 <br>
+<!-- Back Button -->
 <div class="button-container">
     <form action="/teacher/class-students" method="get">
         <input type="hidden" name="courseId" th:value="${courseId}" />
-        <button type="submit">Back to Class Students</button>
+        <button type="submit" class="btn btn-secondary btn-lg">Back to Class Students</button>
     </form>
 </div>
+
+
 
 </body>
 </html>
