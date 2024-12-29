@@ -25,6 +25,7 @@
         <th>Academic Year</th>
         <th>Credits</th>
         <th>Main Subject</th>
+        <th>Grade Class</th>
       </tr>
       </thead>
       <tbody>
@@ -35,6 +36,9 @@
         <td th:text="${course.academicYear}"></td>
         <td th:text="${course.credits}"></td>
         <td th:text="${course.mainSubject}"></td>
+        <td class="text-center">
+          <a th:href="@{/teacher/class-students(courseId=${course.courseId})}" class="btn btn-primary">Grade</a>
+        </td>
       </tr>
       </tbody>
     </table>

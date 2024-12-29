@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Marks</title>
+</head>
+<body>
+<form action="/teacher/delete-marks" method="post">
+    <!-- Hidden field for courseId -->
+    <input type="hidden" name="courseId" th:value="${courseId}" />
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Delete Marks</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="enrollment : ${enrollments}">
+            <tr>
+                <td th:text="${enrollment.student.firstName + ' ' + enrollment.student.lastName}"></td>
+                <td>
+                    <!-- Delete checkbox uniquely associated with each enrollment -->
+                    <input type="checkbox" name="deleteMarks" th:value="${enrollment.id}" />
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+
+    <br>
+    <button type="submit">Delete Selected Marks</button>
+</form>
+
+
+
+</body>
+</html>

@@ -18,6 +18,9 @@ public class Enrollment {
     @JoinColumn(name = "student_id", nullable = false)
     private User student;
 
+    @Column(nullable = true)
+    private Integer Marks;
+
     // Getters and Setters
     public Long getId() {
         return id;
@@ -42,5 +45,13 @@ public class Enrollment {
     public void setStudent(User student) {
         this.student = student;
     }
-}
 
+    public Integer getMarks() {
+        return Marks;
+    }
+
+    // Change the setter to accept Integer instead of int to allow null values
+    public void setMarks(Integer marks) {
+        Marks = marks;
+    }
+}

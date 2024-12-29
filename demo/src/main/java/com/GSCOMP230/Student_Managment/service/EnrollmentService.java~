@@ -1,0 +1,4 @@
+package com.GSCOMP230.Student_Managment.service;
+
+public class EnrollmentService {
+}

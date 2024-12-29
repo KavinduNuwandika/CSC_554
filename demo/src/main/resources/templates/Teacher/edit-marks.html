@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Marks</title>
+</head>
+<body>
+
+<h2>Edit Marks for Course: <span th:text="${course.courseName}"></span></h2>
+
+<form action="/teacher/edit-marks" method="post">
+    <!-- Hidden field for courseId -->
+    <input type="hidden" name="courseId" th:value="${courseId}" />
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Marks</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="enrollment : ${enrollments}">
+            <tr>
+                <td th:text="${enrollment.student.firstName + ' ' + enrollment.student.lastName}"></td>
+                <td>
+                    <!-- Marks input field -->
+                    <input type="number" name="marks" th:value="${enrollment.marks}" min="0" max="100" />
+                    <input type="hidden" name="enrollmentIds" th:value="${enrollment.id}" />
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+
+    <br>
+    <button type="submit">Save Changes</button>
+</form>
+
+<br>
+<div class="button-container">
+    <form action="/teacher/class-students" method="get">
+        <input type="hidden" name="courseId" th:value="${courseId}" />
+        <button type="submit">Back to Class Students</button>
+    </form>
+</div>
+
+</body>
+</html>

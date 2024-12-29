@@ -21,8 +21,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByPhone(String phone);
 
 
+
+
     Optional<User>findByPhone(String phone);
 
     @Query("SELECT DISTINCT u.regYear FROM User u")
     List<Integer> findDistinctRegYears();
+
 }
