@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,10 +74,30 @@
 <body>
 
 <div class="container">
-    <h1>Welcome, Student!</h1>
+    <h1>Welcome, <span th:text="${user.firstName}">User</span> <span th:text="${user.lastName}" >User</span></h1>
+
+    <div class="mt-4">
+        <p>
+            As a student, you can view your registered courses and results.
+        </p>
+    </div>
+</div>
+
+
+    <div class="container mt-5">
+        <div th:if="${user}" class="user-details">
+            <h2>User Details</h2>
+            <p><strong>Name:</strong> <span th:text="${user.firstName}">User</span> <span th:text="${user.lastName}">User</span></p>
+            <p><strong>Email:</strong> <span th:text="${user.email}">Email</span></p>
+            <p><strong>Phone:</strong> <span th:text="${user.phone}">Phone</span></p>
+            <p><strong>Date of Birth:</strong> <span th:text="${user.dob}">Date of Birth</span></p>
+        </div>
+    </div>
+
+
     <div class="button-container">
-        <a href="/student/registered-classes" class="tab-link btn btn-outline-primary">Registered Classes</a>
-        <a href="/student/view-results" class="tab-link btn btn-outline-primary">View Results</a>
+        <a href="#" th:href="@{/student/registered-courses(studentId=${user.id})}" class="tab-link btn btn-outline-primary">Registered Courses</a>
+        <a href="#" th:href="@{/student/view-results(id=${user.id})}" class="tab-link btn btn-outline-primary">View Results</a>
     </div>
 
     <div class="button-container">

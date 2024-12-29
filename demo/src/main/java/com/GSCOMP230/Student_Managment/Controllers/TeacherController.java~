@@ -35,9 +35,6 @@ public class TeacherController {
     @Autowired
     private EnrollmentService enrollmentService;
 
-    @Autowired
-    private GradeCalculator gradeCalculator;
-
     // Method to create a new course
     @GetMapping("/teacher/create-class")
     public String createCourse() {
@@ -57,7 +54,7 @@ public class TeacherController {
                 .map(enrollment -> {
                     User student = enrollment.getStudent();
                     Integer marks = enrollment.getMarks();
-                    String grade = gradeCalculator.calculateGrade(marks); // Only calculate grade if marks are not null
+                    String grade = calculateGrade(marks); // Only calculate grade if marks are not null
                     return new StudentGradeInfo(student, marks, grade);
                 })
                 .collect(Collectors.toList());
