@@ -28,6 +28,7 @@
             <th>Teacher</th>
             <th>Change Teacher</th>
             <th>Actions</th>
+            <th>Enroll Students</th>
         </tr>
         </thead>
         <tbody>
@@ -48,13 +49,17 @@
             <td>
                 <a th:href="@{/admin/delete-course/{courseId}(courseId=${course.courseId})}" class="btn-danger">Delete</a>
             </td>
+            <td>
+                <a th:href="@{/admin/enroll-students(courseId=${course.courseId})}" class="btn-primary">Enroll Students</a>
+            </td>
         </tr>
+
 
         </tbody>
     </table>
 </div>
 
-    <div class=".mt-5">
+    <div class="mt-5">
         <br>
         <a href="/admin/home" class="btn-home">Go to Admin Home</a>
     </div>

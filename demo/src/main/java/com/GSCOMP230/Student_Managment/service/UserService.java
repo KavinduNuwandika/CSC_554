@@ -15,6 +15,13 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
+    }
+
+    public User getUserByPhone(String phone) {
+        return userRepository.findByPhone(phone).orElse(null);
+    }
     public boolean isEmailOrPhoneExist(String email, String phone) {
         return userRepository.existsByEmail(email) || userRepository.existsByPhone(phone);
     }

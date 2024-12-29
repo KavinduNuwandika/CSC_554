@@ -25,15 +25,18 @@
         <tr>
             <th>Course Code</th>
             <th>Course Name</th>
+            <th>Academic Year</th>
             <th>Teacher</th>
             <th>Change Teacher</th>
             <th>Actions</th>
+            <th>Enroll Students</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="course : ${courses}">
             <td th:text="${course.courseCode}"></td>
             <td th:text="${course.courseName}"></td>
+            <td th:text="${course.academicYear}"></td>
             <td th:text="${course.teacher != null ? course.teacher.firstName + ' ' + course.teacher.lastName : 'No teacher assigned'}"></td>
             <td>
                 <!-- Form to update the teacher -->
@@ -48,7 +51,11 @@
             <td>
                 <a th:href="@{/admin/delete-course/{courseId}(courseId=${course.courseId})}" class="btn-danger">Delete</a>
             </td>
+            <td>
+                <a th:href="@{/admin/enroll-students(courseId=${course.courseId})}" class="btn-primary">Enroll Students</a>
+            </td>
         </tr>
+
 
         </tbody>
     </table>
