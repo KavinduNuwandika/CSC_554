@@ -29,7 +29,6 @@ public class StudentController {
 
 
 
-
     @GetMapping("/student/registered-courses")
     public String viewRegisteredCourses(@RequestParam Long studentId, Model model) {
         Set<Course> registeredCourses = enrollmentService.getRegisteredCoursesByStudentId(studentId);

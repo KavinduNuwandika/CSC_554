@@ -27,13 +27,7 @@ public class StudentController {
     @Autowired
     private EnrollmentRepository enrollmentRepository;
 
-
-
-    @GetMapping("/student/home")
-    public String showStudentHome(Model model) {
-        return "Student/StudentHome"; // Return the student home view
-    }
-
+    
 
     @GetMapping("/student/registered-courses")
     public String viewRegisteredCourses(@RequestParam Long studentId, Model model) {

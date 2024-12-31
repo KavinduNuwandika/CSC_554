@@ -75,7 +75,7 @@ public class TeacherController {
         model.addAttribute("markedStudents", markedStudents);
         model.addAttribute("unmarkedStudents", unmarkedStudents);
 
-        return "Teacher/class-students"; // This is the Thymeleaf template name
+        return "Teacher/Class-Students"; // This is the Thymeleaf template name
     }
 
     // Method to display the page for marking students
