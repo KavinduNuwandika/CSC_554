@@ -29,11 +29,12 @@ public class StudentController {
 
 
 
+
     @GetMapping("/student/registered-courses")
     public String viewRegisteredCourses(@RequestParam Long studentId, Model model) {
         Set<Course> registeredCourses = enrollmentService.getRegisteredCoursesByStudentId(studentId);
         model.addAttribute("courses", registeredCourses);
-        return "student/registered-courses"; // Return the appropriate view
+        return "Student/registered-courses"; // Return the appropriate view
     }
 
     @GetMapping("/student/view-results")

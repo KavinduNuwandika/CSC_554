@@ -42,7 +42,7 @@ public class LoginController {
             Optional<User> userOpt = userRepository.findByEmail(email); // Fetch user by email
             userOpt.ifPresent(user -> model.addAttribute("user", user)); // Pass user details to the results page
         }
-        return "student/StudentHome"; // Return the student results view
+        return "Student/StudentHome"; // Return the student results view
     }
 
     @PostMapping("/login")

@@ -29,11 +29,17 @@ public class StudentController {
 
 
 
+    @GetMapping("/student/home")
+    public String showStudentHome(Model model) {
+        return "Student/StudentHome"; // Return the student home view
+    }
+
+
     @GetMapping("/student/registered-courses")
     public String viewRegisteredCourses(@RequestParam Long studentId, Model model) {
         Set<Course> registeredCourses = enrollmentService.getRegisteredCoursesByStudentId(studentId);
         model.addAttribute("courses", registeredCourses);
-        return "student/registered-courses"; // Return the appropriate view
+        return "Student/registered-courses"; // Return the appropriate view
     }
 
     @GetMapping("/student/view-results")
@@ -57,7 +63,7 @@ public class StudentController {
         model.addAttribute("markedSubjects", markedSubjects);
         model.addAttribute("unmarkedSubjects", unmarkedSubjects);
 
-        return "view-results";  // Return the view template
+        return "Student/view-results";  // Return the view template
     }
 
 
