@@ -32,7 +32,7 @@ public class LoginController {
             Optional<User> userOpt = userRepository.findByEmail(email); // Fetch user by email
             userOpt.ifPresent(user -> model.addAttribute("user", user)); // Pass user details to the dashboard
         }
-        return "Teacher/TeacherHome"; // Return the teacher dashboard view
+        return "/Teacher/TeacherHome"; // Return the teacher dashboard view
     }
 
     @GetMapping("/student/home")

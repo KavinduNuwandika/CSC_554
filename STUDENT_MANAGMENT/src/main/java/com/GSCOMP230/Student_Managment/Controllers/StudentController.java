@@ -10,12 +10,10 @@ import com.GSCOMP230.Student_Managment.model.Course;
 import com.GSCOMP230.Student_Managment.model.Enrollment;
 import com.GSCOMP230.Student_Managment.service.EnrollmentService;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.GSCOMP230.Student_Managment.DTO.GradeCalculator;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
+import java.util.*;
 
 
 @Controller
@@ -38,27 +36,42 @@ public class StudentController {
 
     @GetMapping("/student/view-results")
     public String viewResults(@RequestParam("id") Long userId, Model model) {
-        // Fetch enrollments for the given student
         List<Enrollment> enrollments = enrollmentRepository.findByStudent_Id(userId);
 
-        // Separate into marked and unmarked subjects
-        List<Enrollment> markedSubjects = new ArrayList<>();
+        List<Map<String, Object>> markedSubjects = new ArrayList<>();
         List<Enrollment> unmarkedSubjects = new ArrayList<>();
+
+        GradeCalculator gradeCalculator = new GradeCalculator();
+        double totalGradePoints = 0.0;
+        int totalCredits = 0;
 
         for (Enrollment enrollment : enrollments) {
             if (enrollment.getMarks() != null) {
-                markedSubjects.add(enrollment);
+                String grade = gradeCalculator.calculateGrade(enrollment.getMarks());
+                double gradePoints = gradeCalculator.getGradePoints(grade);
+
+                // Add grade points and credits to the total
+                totalGradePoints += gradePoints * enrollment.getCourse().getCredits();
+                totalCredits += enrollment.getCourse().getCredits();
+
+                // Prepare data for view
+                Map<String, Object> entry = new HashMap<>();
+                entry.put("enrollment", enrollment);
+                entry.put("grade", grade);
+                markedSubjects.add(entry);
             } else {
                 unmarkedSubjects.add(enrollment);
             }
         }
 
-        // Add attributes to the model for use in Thymeleaf template
+        // Calculate GPA
+        double gpa = totalCredits > 0 ? totalGradePoints / totalCredits : 0.0;
+
         model.addAttribute("markedSubjects", markedSubjects);
         model.addAttribute("unmarkedSubjects", unmarkedSubjects);
+        model.addAttribute("currentGPA", String.format("%.2f", gpa)); // Format GPA to 2 decimal places
 
-        return "Student/view-results";  // Return the view template
+        return "Student/view-results";
     }
-
 
 }

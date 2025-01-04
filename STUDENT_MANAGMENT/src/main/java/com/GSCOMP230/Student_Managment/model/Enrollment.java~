@@ -55,4 +55,6 @@ public class Enrollment {
         Marks = marks;
     }
 
+    public void setGrade(String s) {
+    }
 }

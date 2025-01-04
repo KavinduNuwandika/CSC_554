@@ -14,12 +14,15 @@
             padding-top: 60px;
         }
 
-        h1 {
+        h1, h3, h4 {
             color: #333;
+        }
+
+        h1 {
             margin-bottom: 30px;
         }
 
-        h3 {
+        h3, h4 {
             color: #007bff;
         }
 
@@ -76,6 +79,19 @@
         .btn-home:focus {
             outline: none;
         }
+
+        .alert-custom {
+            font-size: 1.1rem;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        /* Add responsiveness for tables */
+        @media (max-width: 767px) {
+            .table th, .table td {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -83,9 +99,23 @@
 <div class="container">
     <h1 class="text-center">Student Results</h1>
 
+    <!-- Navigation Bar (Breadcrumbs) -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/student/home">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Results</li>
+        </ol>
+    </nav>
+
     <!-- Marked Subjects Section -->
     <div class="mt-4">
         <h3>Marked Subjects</h3>
+
+        <!-- No Results Alert -->
+        <div th:if="${#lists.isEmpty(markedSubjects)}" class="alert alert-warning alert-custom" role="alert">
+            No subjects have been marked yet.
+        </div>
+
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
@@ -95,26 +125,38 @@
                 <th>Academic Year</th>
                 <th>Credits</th>
                 <th>Marks</th>
+                <th>Grade</th>
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="enrollment : ${markedSubjects}">
+            <th:block th:each="entry : ${markedSubjects}">
                 <tr>
-                    <td th:text="${enrollment.course.courseName}"></td>
-                    <td th:text="${enrollment.course.mainSubject}"></td>
-                    <td th:text="${enrollment.course.courseCode}"></td>
-                    <td th:text="${enrollment.course.academicYear}"></td>
-                    <td th:text="${enrollment.course.credits}"></td>
-                    <td th:text="${enrollment.marks}"></td>
+                    <td th:text="${entry.enrollment.course.courseName}"></td>
+                    <td th:text="${entry.enrollment.course.mainSubject}"></td>
+                    <td th:text="${entry.enrollment.course.courseCode}"></td>
+                    <td th:text="${entry.enrollment.course.academicYear}"></td>
+                    <td th:text="${entry.enrollment.course.credits}"></td>
+                    <td th:text="${entry.enrollment.marks}"></td>
+                    <td th:text="${entry.grade}"></td>
                 </tr>
             </th:block>
             </tbody>
         </table>
     </div>
 
+    <div class="mt-3">
+        <h4>Current GPA: <span th:text="${currentGPA}"></span></h4>
+    </div>
+
     <!-- Unmarked Subjects Section -->
     <div class="mt-4">
         <h3>Unmarked Subjects</h3>
+
+        <!-- No Results Alert -->
+        <div th:if="${#lists.isEmpty(unmarkedSubjects)}" class="alert alert-info alert-custom" role="alert">
+            All your subjects have been marked!
+        </div>
+
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
@@ -123,7 +165,7 @@
                 <th>Course Name</th>
                 <th>Academic Year</th>
                 <th>Credits</th>
-                <th>Marks</th>
+                <th>Grade</th>
             </tr>
             </thead>
             <tbody>
@@ -134,7 +176,7 @@
                     <td th:text="${enrollment.course.courseName}"></td>
                     <td th:text="${enrollment.course.academicYear}"></td>
                     <td th:text="${enrollment.course.credits}"></td>
-                    <td>No Marks</td>
+                    <td>Not Marked Yet</td>
                 </tr>
             </th:block>
             </tbody>
