@@ -8,10 +8,7 @@ import com.GSCOMP230.Student_Managment.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.GSCOMP230.Student_Managment.repository.CourseRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -141,7 +138,7 @@ public class AdminController {
     }
 
     // Handle the deletion of a course
-    @PostMapping("/admin/delete-course")
+    @DeleteMapping("/admin/delete-course")
     public String deleteCourse(@RequestParam("courseId") Long courseId, Model model) {
         try {
             courseRepository.deleteById(courseId); // Delete the course
