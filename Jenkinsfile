@@ -12,22 +12,28 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the application...'
-                sh './mvnw clean package'
+                dir('STUDENT_MANAGMENT') {
+                    sh './mvnw clean package'
+                }
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh './mvnw test'
+                dir('STUDENT_MANAGMENT') {
+                    sh './mvnw test'
+                }
             }
         }
 
         stage('Docker Build and Deploy') {
             steps {
                 echo 'Building and deploying using Docker Compose...'
-                sh 'docker-compose down'
-                sh 'docker-compose up -d --build'
+                dir('STUDENT_MANAGMENT') {
+                    sh 'docker-compose down'
+                    sh 'docker-compose up -d --build'
+                }
             }
         }
     }
