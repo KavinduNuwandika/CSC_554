@@ -1,5 +1,14 @@
 pipeline {
-    agent any
+    agent {
+        label 'your-agent-label'  // Specifies a Jenkins agent label to define the node where the job should run.
+    }
+
+    options {
+        // Allow Jenkins to run on multiple nodes or specify a specific executor allocation
+        // You can adjust the number of executors for your Jenkins environment if you're using Kubernetes or other orchestrators.
+        disableConcurrentBuilds()  // Avoids concurrent builds for the same pipeline.
+        timeout(time: 1, unit: 'HOURS')  // Defines a timeout to prevent jobs from running indefinitely.
+    }
 
     stages {
         stage('Clone Repository') {
